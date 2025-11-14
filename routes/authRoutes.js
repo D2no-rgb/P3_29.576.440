@@ -8,6 +8,60 @@ const { sendSuccess, sendFail, sendError } = require('../utils/jsend'); // Archi
 //Recordatorio para mi, El registro (POST /users) ya está implementado en userRoutes.js
 
 // POST /auth/login: Iniciar Sesión y Emitir Token... eso espero.
+
+
+/**
+ * @swagger
+ * components:
+ * securitySchemes:
+ * bearerAuth:
+ * type: http
+ * scheme: bearer
+ * bearerFormat: JWT
+ * schemas:
+ * UserCredentials:
+ * type: object
+ * required:
+ * - email
+ * - password
+ * properties:
+ * email:
+ * type: string
+ * format: email
+ * description: Correo electrónico del usuario.
+ * password:
+ * type: string
+ * format: password
+ * description: Contraseña.
+ *
+ * /auth/login:
+ * post:
+ * summary: Iniciar sesión y obtener un token JWT
+ * tags: [Autenticación]
+ * requestBody:
+ * required: true
+ * content:
+ * application/json:
+ * schema:
+ * $ref: '#/components/schemas/UserCredentials'
+ * responses:
+ * 200:
+ * description: Inicio de sesión exitoso. Retorna el JWT.
+ * content:
+ * application/json:
+ * schema:
+ * type: object
+ * properties:
+ * status: { type: string, example: success }
+ * data:
+ * type: object
+ * properties:
+ * token: { type: string, description: El token JWT para autorizar futuras peticiones. }
+ * 401:
+ * description: Credenciales inválidas.
+ */
+
+
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 

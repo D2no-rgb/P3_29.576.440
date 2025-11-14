@@ -35,16 +35,7 @@ const sequelize = require('./config/database');
 const User = require('./models/User'); 
 const userRoutes = require('./routes/userRoutes');
 
-// Sincronizar los modelos con la base de datos
-sequelize.sync({ force: false })
-  .then(() => {
-    console.log('Base de datos y modelos sincronizados.');
-  })
-  .catch(err => {
-    console.error(' Error al sincronizar la base de datos:', err);
-  });
 
-//----------
 
 
 app.use(express.json());

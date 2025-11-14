@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../models/User'); // Modelo de usuario
-const { protect } = require('../middleware/authMiddleware'); 
+const { protect } = require('../middleware/authMiddleware');
 
 // --- Funciones de Utilidad (JSend Response) ---
 const sendSuccess = (res, data, statusCode = 200) => {
@@ -72,7 +72,7 @@ router.post('/', async (req, res) => {
 
 
 // GET /users: Leer Todos los Usuarios (PROTEGIDA)
-router.get('/', protectPlaceholder, async (req, res) => {
+router.get('/', protect, async (req, res) => {
     try {
         const users = await User.findAll({
             // Excluir la contraseña y otros campos sensibles
@@ -87,7 +87,7 @@ router.get('/', protectPlaceholder, async (req, res) => {
 
 
 // GET /users/:id: Leer un Usuario por ID (PROTEGIDA)
-router.get('/:id', protectPlaceholder, async (req, res) => {
+router.get('/:id', protect, async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id, {
             attributes: ['id', 'nombreCompleto', 'email', 'createdAt', 'updatedAt']
@@ -106,7 +106,7 @@ router.get('/:id', protectPlaceholder, async (req, res) => {
 
 
 // PUT /users/:id: Actualizar Usuario (PROTEGIDA)
-router.put('/:id', protectPlaceholder, async (req, res) => {
+router.put('/:id', protect, async (req, res) => {
     const { nombreCompleto, email, password } = req.body;
     const userId = req.params.id;
 
@@ -153,7 +153,7 @@ router.put('/:id', protectPlaceholder, async (req, res) => {
 
 
 // DELETE /users/:id: Eliminar Usuario (PROTEGIDA)
-router.delete('/:id', protectPlaceholder, async (req, res) => {
+router.delete('/:id', protect, async (req, res) => {
     try {
         const deletedRows = await User.destroy({
             where: { id: req.params.id }

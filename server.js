@@ -7,6 +7,18 @@ const server = app.listen(port, () => {
   console.log(`Documentación de Swagger disponible en http://localhost:${port}/api-docs`);
 });
 
+// Sincronizar los modelos con la base de datos
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log('Base de datos y modelos sincronizados.');
+  })
+  .catch(err => {
+    console.error(' Error al sincronizar la base de datos:', err);
+  });
+
+//----------
+
+
 // Manejo básico de errores de servidor
 server.on('error', (error) => {
   if (error.code === 'EADDRINUSE') {
