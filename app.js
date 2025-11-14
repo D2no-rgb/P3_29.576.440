@@ -51,10 +51,4 @@ app.get('/ping', (req, res) => {
   res.status(200).send(''); 
 });
 
-
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-  console.log(`🚀 Servidor Express iniciado en el puerto ${port}`);
-  console.log(`Documentación de Swagger disponible en http://localhost:${port}/api-docs`);
-});
+module.exports = app;
