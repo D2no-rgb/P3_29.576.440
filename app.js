@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 
+const authRoutes = require('./routes/authRoutes');
+
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
@@ -29,6 +31,27 @@ const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
+const sequelize = require('./config/database');
+const User = require('./models/User'); 
+const userRoutes = require('./routes/userRoutes');
+
+// Sincronizar los modelos con la base de datos
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log('Base de datos y modelos sincronizados.');
+  })
+  .catch(err => {
+    console.error(' Error al sincronizar la base de datos:', err);
+  });
+
+//----------
+
+
+app.use(express.json());
+
+// Definición de la ruta base para /auth
+app.use('/auth', authRoutes); 
+app.use('/users', userRoutes);
 
 // Configuración del endpoint GET /about
 app.get('/about', (req, res) => {
