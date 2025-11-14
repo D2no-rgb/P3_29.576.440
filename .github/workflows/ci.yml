@@ -30,8 +30,8 @@ jobs:
 
       # Paso 3: Instalar dependencias (npm install)
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       # Paso 4: Ejecutar la suite de pruebas (npm test)
       - name: Run tests
-        run: npx test
+        run: npm run test
