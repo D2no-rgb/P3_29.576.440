@@ -1,0 +1,5 @@
+# Directorios de dependencias
+node_modules/
+
+# Archivos de base de datos
+*.sqlite
