@@ -1,4 +1,3 @@
-//framework Express.
 const express = require('express');
 const app = express();
 
@@ -40,11 +39,11 @@ const userRoutes = require('./routes/userRoutes');
 
 app.use(express.json());
 
-// Definición de la ruta para /auth
+// Definición de la ruta para /auth.
 app.use('/auth', authRoutes); 
 app.use('/users', userRoutes);
 
-// Configuración del endpoint GET /about
+// Configuración del endpoint GET /about.
 app.get('/about', (req, res) => {
   const miInformacion = {
     nombreCompleto: "Daniel Moreno", 
@@ -65,4 +64,5 @@ app.get('/ping', (req, res) => {
   res.status(200).send(''); 
 });
 
+//Exportarcion.
 module.exports = app;

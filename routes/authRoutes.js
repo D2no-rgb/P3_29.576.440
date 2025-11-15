@@ -7,7 +7,7 @@ const { sendSuccess, sendFail, sendError } = require('../utils/jsend'); // Archi
 
 //Recordatorio para mi, El registro (POST /users) ya está implementado en userRoutes.js
 
-// POST /auth/login: Iniciar Sesión y Emitir Token... eso espero.
+// POST /auth/login: Iniciar Sesión y Emitir Token... espero que funcione.
 
 
 /**
@@ -86,7 +86,7 @@ router.post('/login', async (req, res) => {
             });
         } else {
             // 4. Credenciales incorrectas
-            sendFail(res, "Credenciales de acceso inválidas.", 401); // 401 Unauthorized (No autorizado)
+            sendFail(res, "Credenciales de acceso inválidas.", 401); // 401 Unauthorized (No Autorizado.)
         }
 
     } catch (error) {
