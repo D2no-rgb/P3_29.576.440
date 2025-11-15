@@ -3,7 +3,7 @@ const app = require('../app');
 
 describe('API Endpoints Status Check', () => {
 
-  // Prueba para el endpoint GET /ping
+  // Para el endpoint GET /ping
   test('GET /ping should respond with 200 OK', async () => {
     const response = await request(app).get('/ping');
     

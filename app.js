@@ -40,7 +40,7 @@ const userRoutes = require('./routes/userRoutes');
 
 app.use(express.json());
 
-// Definición de la ruta base para /auth
+// Definición de la ruta para /auth
 app.use('/auth', authRoutes); 
 app.use('/users', userRoutes);
 
