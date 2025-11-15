@@ -1,4 +1,5 @@
 // server.js
+const sequelize = require('./config/database');
 const app = require('./app'); // Importa la aplicación Express
 const port = process.env.PORT || 3000;
 
@@ -8,14 +9,15 @@ const server = app.listen(port, () => {
 });
 
 // Sincronizar los modelos con la base de datos
-sequelize.sync({ force: false })
-  .then(() => {
-    console.log('Base de datos y modelos sincronizados.');
-  })
-  .catch(err => {
-    console.error(' Error al sincronizar la base de datos:', err);
-  });
-
+sequelize.sync({ force: false }) 
+    .then(() => {
+        app.listen(process.env.PORT || 3000, () => {
+            console.log(`Servidor Express iniciado en el puerto ${process.env.PORT || 3000}`);
+        });
+    })
+    .catch(err => {
+        console.error('Error al sincronizar la base de datos:', err);
+});
 //----------
 
 
